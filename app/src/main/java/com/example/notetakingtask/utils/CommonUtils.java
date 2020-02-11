@@ -1,4 +1,4 @@
-package com.example.notetakingtask;
+package com.example.notetakingtask.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

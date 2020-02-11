@@ -8,14 +8,14 @@ import androidx.appcompat.app.AppCompatActivity;
 public abstract class BaseActivity extends AppCompatActivity
 {
 
-    protected String TAG;
+    protected final String TAG = getClass().getSimpleName();
+
     protected abstract void initObservers();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        TAG = getClass().getSimpleName();
     }
 
 }

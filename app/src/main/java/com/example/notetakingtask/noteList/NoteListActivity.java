@@ -5,7 +5,8 @@ import android.os.Bundle;
 import com.example.notetakingtask.BaseActivity;
 import com.example.notetakingtask.R;
 
-public class NoteListActivity extends BaseActivity {
+public class NoteListActivity extends BaseActivity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +15,8 @@ public class NoteListActivity extends BaseActivity {
     }
 
     @Override
-    protected void initObservers() {
+    protected void initObservers()
+    {
 
     }
 

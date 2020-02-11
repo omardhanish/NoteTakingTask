@@ -1,4 +1,4 @@
-package com.example.notetakingtask;
+package com.example.notetakingtask.utils;
 
 public class PojoUtils
 {
