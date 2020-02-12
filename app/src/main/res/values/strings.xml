@@ -6,4 +6,5 @@
     <string name="add">ADD</string>
     <string name="save">SAVE</string>
     <string name="add_note">Add Note</string>
+    <string name="title_and_content_must_not_be_empty">Title and Notet must not be empty</string>
 </resources>

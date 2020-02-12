@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -31,6 +32,9 @@ public class AddNoteActivity extends BaseActivity
     //viewModel
     AddNoteViewModel mAddNoteViewModel;
 
+    //flag
+    private boolean allowSaveClick = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -45,6 +49,8 @@ public class AddNoteActivity extends BaseActivity
 
         initClickListener();
         initObservers();
+
+        setShowHideSaveButton();
     }
 
     @Override
@@ -70,7 +76,7 @@ public class AddNoteActivity extends BaseActivity
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mAddNoteViewModel.setShowHideShowButton(et_title.getText().toString().trim() , et_note.getText().toString().trim());
+                setShowHideSaveButton();
             }
         });
 
@@ -87,9 +93,14 @@ public class AddNoteActivity extends BaseActivity
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mAddNoteViewModel.setShowHideShowButton(et_title.getText().toString().trim() , et_note.getText().toString().trim());
+                setShowHideSaveButton();
             }
         });
+    }
+
+    private void setShowHideSaveButton()
+    {
+        mAddNoteViewModel.setShowHideShowButton(et_title.getText().toString().trim() , et_note.getText().toString().trim());
     }
 
     @Override
@@ -99,10 +110,13 @@ public class AddNoteActivity extends BaseActivity
             @Override
             public void onChanged(Boolean show)
             {
+                allowSaveClick = show;
                 if(show)
-                    tv_save.setVisibility(View.VISIBLE);
-                else
-                    tv_save.setVisibility(View.INVISIBLE);
+                {
+                    tv_save.setBackground(getResources().getDrawable(R.drawable.border_green));
+                } else{
+                    tv_save.setBackground(getResources().getDrawable(R.drawable.border_green_disabled));
+                }
             }
         });
 
@@ -110,17 +124,22 @@ public class AddNoteActivity extends BaseActivity
             @Override
             public void onChanged(View view)
             {
-                NoteModel noteModel = new NoteModel();
-                noteModel.setTitle(et_title.getText().toString());
-                noteModel.setContent(et_note.getText().toString());
+                if(allowSaveClick)
+                {
+                    NoteModel noteModel = new NoteModel();
+                    noteModel.setTitle(et_title.getText().toString());
+                    noteModel.setContent(et_note.getText().toString());
 
-                mAddNoteViewModel.addNote(noteModel);
+                    mAddNoteViewModel.addNote(noteModel);
 
-                Intent intent = new Intent(AddNoteActivity.this , ViewNoteActivity.class);
-                intent.putExtra(IntentData.CONTENT.name() , noteModel.getContent());
-                intent.putExtra(IntentData.TITLE.name() , noteModel.getTitle());
-                intent.putExtra(IntentData.FROM_ADD_NOTE.name() , true);
-                startActivity(intent);
+                    Intent intent = new Intent(AddNoteActivity.this , ViewNoteActivity.class);
+                    intent.putExtra(IntentData.CONTENT.name() , noteModel.getContent());
+                    intent.putExtra(IntentData.TITLE.name() , noteModel.getTitle());
+                    intent.putExtra(IntentData.FROM_ADD_NOTE.name() , true);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(AddNoteActivity.this, getString(R.string.title_and_content_must_not_be_empty), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
