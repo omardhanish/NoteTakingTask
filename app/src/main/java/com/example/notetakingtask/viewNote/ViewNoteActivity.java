@@ -44,6 +44,9 @@ public class ViewNoteActivity extends BaseActivity {
         content = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name()) :
                 getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
 
+        initObservers();
+
+        mViewNoteViewModel.getSetNoteDetails().setValue(true);
     }
 
     @Override
