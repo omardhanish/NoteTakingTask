@@ -1,4 +1,4 @@
-package com.example.notetakingtask.noteAddView;
+package com.example.notetakingtask.addNote;
 
 import android.app.Application;
 import android.view.View;
@@ -10,7 +10,7 @@ import com.example.notetakingtask.BaseViewModel;
 import com.example.notetakingtask.repository.NoteRepository;
 import com.example.notetakingtask.repository.model.NoteModel;
 
-public class NoteAddEditViewModel extends BaseViewModel
+public class AddNoteViewModel extends BaseViewModel
 {
     //repo
     private NoteRepository mNoteRepository;
@@ -19,7 +19,7 @@ public class NoteAddEditViewModel extends BaseViewModel
     private MutableLiveData<View> saveOnClick = new MutableLiveData<>();
     private MutableLiveData<Boolean> showHideShowButton = new MutableLiveData<>();
 
-    public NoteAddEditViewModel(@NonNull Application application) {
+    public AddNoteViewModel(@NonNull Application application) {
         super(application);
         mNoteRepository = getRepo(RepoName.NOTE , NoteRepository.class);
     }

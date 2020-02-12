@@ -1,4 +1,4 @@
-package com.example.notetakingtask.noteAddView;
+package com.example.notetakingtask.addNote;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,7 +15,7 @@ import com.example.notetakingtask.BaseActivity;
 import com.example.notetakingtask.R;
 import com.example.notetakingtask.repository.model.NoteModel;
 
-public class NoteAddEditActivity extends BaseActivity
+public class AddNoteActivity extends BaseActivity
 {
 
     //View
@@ -23,7 +23,7 @@ public class NoteAddEditActivity extends BaseActivity
     TextView tv_save;
 
     //viewModel
-    NoteAddEditViewModel mNoteAddEditViewModel;
+    AddNoteViewModel mAddNoteViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -35,7 +35,7 @@ public class NoteAddEditActivity extends BaseActivity
         et_title = findViewById(R.id.et_title);
         tv_save = findViewById(R.id.tv_save);
 
-        mNoteAddEditViewModel = new ViewModelProvider(this).get(NoteAddEditViewModel.class);
+        mAddNoteViewModel = new ViewModelProvider(this).get(AddNoteViewModel.class);
 
         initClickListener();
         initObservers();
@@ -47,7 +47,7 @@ public class NoteAddEditActivity extends BaseActivity
         tv_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mNoteAddEditViewModel.setSaveOnClick(view);
+                mAddNoteViewModel.setSaveOnClick(view);
             }
         });
 
@@ -64,7 +64,7 @@ public class NoteAddEditActivity extends BaseActivity
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mNoteAddEditViewModel.setShowHideShowButton(et_title.getText().toString().trim() , et_note.getText().toString().trim());
+                mAddNoteViewModel.setShowHideShowButton(et_title.getText().toString().trim() , et_note.getText().toString().trim());
             }
         });
 
@@ -81,7 +81,7 @@ public class NoteAddEditActivity extends BaseActivity
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mNoteAddEditViewModel.setShowHideShowButton(et_title.getText().toString().trim() , et_note.getText().toString().trim());
+                mAddNoteViewModel.setShowHideShowButton(et_title.getText().toString().trim() , et_note.getText().toString().trim());
             }
         });
     }
@@ -89,7 +89,7 @@ public class NoteAddEditActivity extends BaseActivity
     @Override
     protected void initObservers()
     {
-        mNoteAddEditViewModel.getShowHideShowButton().observe(this, new Observer<Boolean>() {
+        mAddNoteViewModel.getShowHideShowButton().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean show)
             {
@@ -100,7 +100,7 @@ public class NoteAddEditActivity extends BaseActivity
             }
         });
 
-        mNoteAddEditViewModel.getSaveOnClick().observe(this, new Observer<View>() {
+        mAddNoteViewModel.getSaveOnClick().observe(this, new Observer<View>() {
             @Override
             public void onChanged(View view)
             {
@@ -108,7 +108,7 @@ public class NoteAddEditActivity extends BaseActivity
                 noteModel.setTitle(et_title.getText().toString());
                 noteModel.setContent(et_note.getText().toString());
 
-                mNoteAddEditViewModel.addNote(noteModel);
+                mAddNoteViewModel.addNote(noteModel);
             }
         });
     }

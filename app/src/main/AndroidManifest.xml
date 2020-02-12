@@ -22,7 +22,11 @@
         </activity>
 
 
-        <activity android:name=".noteAddView.NoteAddEditActivity"
+        <activity android:name=".addNote.AddNoteActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionTheme"/>
+
+        <activity android:name=".viewNote.ViewNoteActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoActionTheme"/>
 

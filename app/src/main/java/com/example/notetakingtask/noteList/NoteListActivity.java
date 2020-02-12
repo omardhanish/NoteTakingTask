@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notetakingtask.BaseActivity;
 import com.example.notetakingtask.R;
-import com.example.notetakingtask.noteAddView.NoteAddEditActivity;
+import com.example.notetakingtask.addNote.AddNoteActivity;
 import com.example.notetakingtask.repository.model.NoteModel;
 
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class NoteListActivity extends BaseActivity
             {
                 if(view != null)
                 {
-                    Intent intent = new Intent(NoteListActivity.this , NoteAddEditActivity.class);
+                    Intent intent = new Intent(NoteListActivity.this , AddNoteActivity.class);
                     startActivity(intent);
                 }
             }
