@@ -3,11 +3,14 @@ package com.example.notetakingtask;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.notetakingtask.repository.model.NoteModel;
 import com.example.notetakingtask.repository.room.DatabaseClient;
 import com.example.notetakingtask.repository.room.NoteDao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AsyncProcess

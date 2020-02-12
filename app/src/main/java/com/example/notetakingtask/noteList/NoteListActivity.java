@@ -20,7 +20,6 @@ import java.util.List;
 
 public class NoteListActivity extends BaseActivity
 {
-
     //View
     RecyclerView rv_note_list;
     TextView tv_add;
@@ -61,7 +60,7 @@ public class NoteListActivity extends BaseActivity
             @Override
             public void onClick(View view)
             {
-                mNoteListViewModel.setAddNoteOnClick(true);
+                mNoteListViewModel.setAddNoteOnClick(view);
             }
         });
     }
@@ -69,15 +68,30 @@ public class NoteListActivity extends BaseActivity
     @Override
     protected void initObservers()
     {
-        mNoteListViewModel.getAddNoteOnClick().observe(this, new Observer<Boolean>()
+        mNoteListViewModel.getAddNoteOnClick().observe(this, new Observer<View>()
         {
             @Override
-            public void onChanged(Boolean onClick)
+            public void onChanged(View view)
             {
-                if(onClick != null && onClick)
+                if(view != null)
                 {
                     Intent intent = new Intent(NoteListActivity.this , NoteAddEditActivity.class);
                     startActivity(intent);
+                }
+            }
+        });
+
+        mNoteListViewModel.getNoteModelList().observe(this, new Observer<List<NoteModel>>() {
+            @Override
+            public void onChanged(List<NoteModel> noteModels)
+            {
+                if(noteModels != null)
+                {
+                    mNoteModelList.clear();
+                    mNoteModelList.addAll(noteModels);
+
+                    if(mAdapter != null)
+                        mAdapter.notifyDataSetChanged();
                 }
             }
         });
