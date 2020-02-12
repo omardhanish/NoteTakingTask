@@ -9,7 +9,6 @@ import com.example.notetakingtask.repository.NoteRepository;
 
 public abstract class BaseViewModel extends AndroidViewModel
 {
-
     public enum RepoName
     {
         NOTE
@@ -24,7 +23,7 @@ public abstract class BaseViewModel extends AndroidViewModel
         switch (repoName)
         {
             case NOTE:
-                return type.cast(NoteRepository.getINSTANCE(getApplication()));
+                return type.cast(NoteRepository.getINSTANCE());
         }
 
         return null;

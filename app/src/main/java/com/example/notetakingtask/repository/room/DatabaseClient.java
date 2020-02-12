@@ -29,4 +29,10 @@ public class DatabaseClient
     public Database getAppDatabase() {
         return appDatabase;
     }
+
+    public NoteDao getNoteDao()
+    {
+        return getAppDatabase().noteDao();
+    }
+
 }

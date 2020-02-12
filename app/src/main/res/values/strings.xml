@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">NoteTakingTask</string>
+    <string name="enter_title">Enter Title</string>
+    <string name="enter_note">Enter Note</string>
+    <string name="list">List</string>
+    <string name="add">ADD</string>
+    <string name="save">SAVE</string>
 </resources>
