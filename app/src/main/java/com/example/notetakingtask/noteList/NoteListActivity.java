@@ -92,7 +92,8 @@ public class NoteListActivity extends BaseActivity
             @Override
             public void onChanged(final List<NoteModel> noteModels)
             {
-                runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable()
+                {
                     @Override
                     public void run()
                     {

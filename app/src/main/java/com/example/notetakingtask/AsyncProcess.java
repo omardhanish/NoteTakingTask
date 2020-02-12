@@ -23,7 +23,7 @@ public class AsyncProcess
 
     public enum AsyncTaskName
     {
-        ADD_NOTE , GET_NOTE_LIST , GET_NOTE_DETAIL
+        ADD_NOTE
     }
 
     public static synchronized void commonAsyncTaskPerformer(final AsyncTaskName asyncTaskName , final PerformTask performTask , final Object... inputArgs)

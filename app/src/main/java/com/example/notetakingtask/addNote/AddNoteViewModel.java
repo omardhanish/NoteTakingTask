@@ -7,13 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.notetakingtask.BaseViewModel;
+import com.example.notetakingtask.repository.NoteRepoApi;
 import com.example.notetakingtask.repository.NoteRepository;
 import com.example.notetakingtask.repository.model.NoteModel;
 
 public class AddNoteViewModel extends BaseViewModel
 {
     //repo
-    private NoteRepository mNoteRepository;
+    private NoteRepoApi mNoteRepository;
 
     //liveData
     private MutableLiveData<View> saveOnClick = new MutableLiveData<>();

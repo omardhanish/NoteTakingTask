@@ -6,13 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.notetakingtask.BaseViewModel;
+import com.example.notetakingtask.repository.NoteRepoApi;
 import com.example.notetakingtask.repository.NoteRepository;
 
 public class ViewNoteViewModel extends BaseViewModel
 {
 
     //repo
-    private NoteRepository noteRepository;
+    private NoteRepoApi noteRepository;
 
 
     public ViewNoteViewModel(@NonNull Application application)
