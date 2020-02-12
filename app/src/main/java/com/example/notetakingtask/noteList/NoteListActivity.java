@@ -90,16 +90,22 @@ public class NoteListActivity extends BaseActivity
 
         mNoteListViewModel.getNoteModelList().observe(this, new Observer<List<NoteModel>>() {
             @Override
-            public void onChanged(List<NoteModel> noteModels)
+            public void onChanged(final List<NoteModel> noteModels)
             {
-                if(noteModels != null)
-                {
-                    mNoteModelList.clear();
-                    mNoteModelList.addAll(noteModels);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        if(noteModels != null)
+                        {
+                            mNoteModelList.clear();
+                            mNoteModelList.addAll(noteModels);
 
-                    if(mAdapter != null)
-                        mAdapter.notifyDataSetChanged();
-                }
+                            if(mAdapter != null)
+                                mAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
             }
         });
 

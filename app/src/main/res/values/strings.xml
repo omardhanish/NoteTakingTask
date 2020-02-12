@@ -2,9 +2,9 @@
     <string name="app_name">NoteTakingTask</string>
     <string name="enter_title">Enter Title</string>
     <string name="enter_note">Enter Note</string>
-    <string name="list">List</string>
+    <string name="list">Note List</string>
     <string name="add">ADD</string>
     <string name="save">SAVE</string>
     <string name="add_note">Add Note</string>
-    <string name="title_and_content_must_not_be_empty">Title and Notet must not be empty</string>
+    <string name="title_and_content_must_not_be_empty">Title and Note must not be empty</string>
 </resources>

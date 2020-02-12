@@ -15,7 +15,7 @@ import com.example.notetakingtask.noteList.NoteListActivity;
 public class ViewNoteActivity extends BaseActivity {
 
     //view
-    private TextView tv_title , tv_timestamp , tv_note;
+    private TextView  tv_timestamp , tv_note, tv_header_toolbar;
 
     //viewModel
     private ViewNoteViewModel mViewNoteViewModel;
@@ -30,9 +30,9 @@ public class ViewNoteActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_note);
 
-        tv_title = findViewById(R.id.tv_title);
         tv_timestamp = findViewById(R.id.tv_timestamp);
         tv_note = findViewById(R.id.tv_note);
+        tv_header_toolbar = findViewById(R.id.tv_header_toolbar);
 
         mViewNoteViewModel = new ViewModelProvider(this).get(ViewNoteViewModel.class);
 
@@ -42,7 +42,7 @@ public class ViewNoteActivity extends BaseActivity {
         String content = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name()) :
                 getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
 
-        tv_title.setText(title);
+        tv_header_toolbar.setText(title);
         tv_note.setText(content);
     }
 
