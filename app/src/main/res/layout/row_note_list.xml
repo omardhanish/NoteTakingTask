@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textAllCaps="true"
             android:textSize="17sp"
             android:transitionName="title_transition"/>
 
