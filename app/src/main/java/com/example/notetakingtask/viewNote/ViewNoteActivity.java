@@ -20,6 +20,10 @@ public class ViewNoteActivity extends BaseActivity {
     //viewModel
     private ViewNoteViewModel mViewNoteViewModel;
 
+    //flags
+    /* if true , it came from AddNoteActivity else from NoteListActivity */
+    private boolean fromAddNote = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -32,6 +36,7 @@ public class ViewNoteActivity extends BaseActivity {
 
         mViewNoteViewModel = new ViewModelProvider(this).get(ViewNoteViewModel.class);
 
+        fromAddNote = getIntent().hasExtra(AddNoteActivity.IntentData.FROM_ADD_NOTE.name());
         String title = getIntent().getStringExtra(AddNoteActivity.IntentData.TITLE.name());
         String content = getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name());
 
@@ -54,7 +59,7 @@ public class ViewNoteActivity extends BaseActivity {
     {
         super.onBackPressed();
 
-        if(getIntent().hasExtra(AddNoteActivity.IntentData.FROM_ADD_NOTE.name()))
+        if(fromAddNote)
         {
             Intent intent = new Intent(ViewNoteActivity.this , NoteListActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

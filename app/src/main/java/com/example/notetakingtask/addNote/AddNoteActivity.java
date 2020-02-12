@@ -16,7 +16,6 @@ import com.example.notetakingtask.BaseActivity;
 import com.example.notetakingtask.R;
 import com.example.notetakingtask.repository.model.NoteModel;
 import com.example.notetakingtask.viewNote.ViewNoteActivity;
-import com.example.notetakingtask.viewNote.ViewNoteViewModel;
 
 public class AddNoteActivity extends BaseActivity
 {
