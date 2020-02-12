@@ -24,7 +24,7 @@ public class ViewNoteActivity extends BaseActivity {
     //flags
     private boolean fromAddNote = false;
 
-    String title = "" , content = "";
+    String title = "" , content = "" , timeStamp = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -43,6 +43,8 @@ public class ViewNoteActivity extends BaseActivity {
                 getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
         content = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name()) :
                 getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
+        timeStamp = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.TIMESTAMP.name()) :
+                getIntent().getStringExtra(NoteListActivity.IntentData.TIMESTAMP.name());
 
         initObservers();
 
@@ -60,6 +62,7 @@ public class ViewNoteActivity extends BaseActivity {
                 {
                     tv_header_toolbar.setText(title);
                     tv_note.setText(content);
+                    tv_timestamp.setText(timeStamp);
                 }
             }
         });

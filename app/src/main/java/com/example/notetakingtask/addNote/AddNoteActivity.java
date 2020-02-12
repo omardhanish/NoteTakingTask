@@ -16,13 +16,14 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.notetakingtask.BaseActivity;
 import com.example.notetakingtask.R;
 import com.example.notetakingtask.repository.model.NoteModel;
+import com.example.notetakingtask.utils.CommonUtils;
 import com.example.notetakingtask.viewNote.ViewNoteActivity;
 
 public class AddNoteActivity extends BaseActivity
 {
 
     public enum IntentData {
-        TITLE , CONTENT , FROM_ADD_NOTE
+        TITLE , CONTENT , TIMESTAMP ,  FROM_ADD_NOTE
     }
 
     //View
@@ -129,12 +130,14 @@ public class AddNoteActivity extends BaseActivity
                     NoteModel noteModel = new NoteModel();
                     noteModel.setTitle(et_title.getText().toString());
                     noteModel.setContent(et_note.getText().toString());
+                    noteModel.setTimestamp(CommonUtils.getTimeStamp());
 
                     mAddNoteViewModel.addNote(noteModel);
 
                     Intent intent = new Intent(AddNoteActivity.this , ViewNoteActivity.class);
                     intent.putExtra(IntentData.CONTENT.name() , noteModel.getContent());
                     intent.putExtra(IntentData.TITLE.name() , noteModel.getTitle());
+                    intent.putExtra(IntentData.TIMESTAMP.name() , noteModel.getTimestamp());
                     intent.putExtra(IntentData.FROM_ADD_NOTE.name() , true);
                     startActivity(intent);
                 }else {

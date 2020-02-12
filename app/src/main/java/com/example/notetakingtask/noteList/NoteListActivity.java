@@ -23,7 +23,7 @@ import java.util.List;
 public class NoteListActivity extends BaseActivity
 {
     public enum IntentData {
-        TITLE , CONTENT , FROM_NOTE_LIST
+        TITLE , CONTENT ,TIMESTAMP , FROM_NOTE_LIST
     }
 
     //View
@@ -118,6 +118,7 @@ public class NoteListActivity extends BaseActivity
                 Intent intent  = new Intent(NoteListActivity.this , ViewNoteActivity.class);
                 intent.putExtra(IntentData.TITLE.name() , mNoteModelList.get(position).getTitle());
                 intent.putExtra(IntentData.CONTENT.name() , mNoteModelList.get(position).getContent());
+                intent.putExtra(IntentData.TIMESTAMP.name() , mNoteModelList.get(position).getTimestamp());
                 intent.putExtra(IntentData.FROM_NOTE_LIST.name() , true);
 
                 ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(NoteListActivity.this ,
