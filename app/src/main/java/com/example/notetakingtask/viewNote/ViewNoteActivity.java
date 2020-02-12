@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.notetakingtask.BaseActivity;
@@ -21,8 +22,9 @@ public class ViewNoteActivity extends BaseActivity {
     private ViewNoteViewModel mViewNoteViewModel;
 
     //flags
-    /* if true , it came from AddNoteActivity else from NoteListActivity */
     private boolean fromAddNote = false;
+
+    String title = "" , content = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -37,18 +39,27 @@ public class ViewNoteActivity extends BaseActivity {
         mViewNoteViewModel = new ViewModelProvider(this).get(ViewNoteViewModel.class);
 
         fromAddNote = getIntent().getBooleanExtra(AddNoteActivity.IntentData.FROM_ADD_NOTE.name() , false);
-        String title = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.TITLE.name()) :
+        title = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.TITLE.name()) :
                 getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
-        String content = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name()) :
+        content = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name()) :
                 getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
 
-        tv_header_toolbar.setText(title);
-        tv_note.setText(content);
     }
 
     @Override
-    protected void initObservers() {
-
+    protected void initObservers()
+    {
+        mViewNoteViewModel.getSetNoteDetails().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean update)
+            {
+                if(update)
+                {
+                    tv_header_toolbar.setText(title);
+                    tv_note.setText(content);
+                }
+            }
+        });
     }
 
     @Override

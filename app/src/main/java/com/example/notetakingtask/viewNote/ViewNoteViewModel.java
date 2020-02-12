@@ -15,6 +15,9 @@ public class ViewNoteViewModel extends BaseViewModel
     //repo
     private NoteRepoApi noteRepository;
 
+    //LiveData
+    private MutableLiveData<Boolean> setNoteDetails = new MutableLiveData<>();
+
 
     public ViewNoteViewModel(@NonNull Application application)
     {
@@ -22,4 +25,7 @@ public class ViewNoteViewModel extends BaseViewModel
         noteRepository = getRepo(RepoName.NOTE , NoteRepository.class);
     }
 
+    MutableLiveData<Boolean> getSetNoteDetails() {
+        return setNoteDetails;
+    }
 }
