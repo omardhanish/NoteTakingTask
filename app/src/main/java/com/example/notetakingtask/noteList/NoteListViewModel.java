@@ -23,6 +23,7 @@ public class NoteListViewModel extends BaseViewModel
     //LiveData
     private MutableLiveData<View> addNoteOnClick = new MutableLiveData<>();
     private LiveData<List<NoteModel>> noteModelList;
+    private MutableLiveData<Integer> callViewActivity = new MutableLiveData<>();
 
     public NoteListViewModel(@NonNull Application application)
     {
@@ -43,5 +44,9 @@ public class NoteListViewModel extends BaseViewModel
 
     void setAddNoteOnClick(View view) {
         this.addNoteOnClick.setValue(view);
+    }
+
+    MutableLiveData<Integer> getCallViewActivity() {
+        return callViewActivity;
     }
 }

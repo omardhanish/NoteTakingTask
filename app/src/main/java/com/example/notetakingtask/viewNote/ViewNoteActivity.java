@@ -36,9 +36,11 @@ public class ViewNoteActivity extends BaseActivity {
 
         mViewNoteViewModel = new ViewModelProvider(this).get(ViewNoteViewModel.class);
 
-        fromAddNote = getIntent().hasExtra(AddNoteActivity.IntentData.FROM_ADD_NOTE.name());
-        String title = getIntent().getStringExtra(AddNoteActivity.IntentData.TITLE.name());
-        String content = getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name());
+        fromAddNote = getIntent().getBooleanExtra(AddNoteActivity.IntentData.FROM_ADD_NOTE.name() , false);
+        String title = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.TITLE.name()) :
+                getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
+        String content = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name()) :
+                getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
 
         tv_title.setText(title);
         tv_note.setText(content);

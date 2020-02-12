@@ -19,10 +19,15 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
 {
     private Context mContext;
     private List<NoteModel> mNoteModelList;
-    View transitionView;
+    private View transitionView;
+    private NoteListViewModel mNoteListViewModel;
 
     View getTransitionView() {
         return transitionView;
+    }
+
+    void setNoteListViewModel(NoteListViewModel mNoteListViewModel) {
+        this.mNoteListViewModel = mNoteListViewModel;
     }
 
     NoteListAdapter(Context mContext, List<NoteModel> mNoteModelList)
@@ -40,7 +45,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position)
     {
         holder.tv_title.setText(mNoteModelList.get(position).getTitle());
         holder.tv_content.setText(mNoteModelList.get(position).getContent());
@@ -52,6 +57,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
             public void onClick(View view)
             {
                 transitionView = holder.tv_title;
+                mNoteListViewModel.getCallViewActivity().setValue(position);
             }
         });
     }

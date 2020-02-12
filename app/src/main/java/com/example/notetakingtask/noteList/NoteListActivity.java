@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,12 +15,17 @@ import com.example.notetakingtask.BaseActivity;
 import com.example.notetakingtask.R;
 import com.example.notetakingtask.addNote.AddNoteActivity;
 import com.example.notetakingtask.repository.model.NoteModel;
+import com.example.notetakingtask.viewNote.ViewNoteActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NoteListActivity extends BaseActivity
 {
+    public enum IntentData {
+        TITLE , CONTENT , FROM_NOTE_LIST
+    }
+
     //View
     RecyclerView rv_note_list;
     TextView tv_add;
@@ -47,6 +53,7 @@ public class NoteListActivity extends BaseActivity
         rv_note_list.setLayoutManager(linearLayoutManager);
 
         mAdapter = new NoteListAdapter(this , mNoteModelList);
+        mAdapter.setNoteListViewModel(mNoteListViewModel);
         rv_note_list.setAdapter(mAdapter);
 
         initClickListener();
@@ -93,6 +100,23 @@ public class NoteListActivity extends BaseActivity
                     if(mAdapter != null)
                         mAdapter.notifyDataSetChanged();
                 }
+            }
+        });
+
+        mNoteListViewModel.getCallViewActivity().observe(this, new Observer<Integer>()
+        {
+            @Override
+            public void onChanged(Integer position)
+            {
+                Intent intent  = new Intent(NoteListActivity.this , ViewNoteActivity.class);
+                intent.putExtra(IntentData.TITLE.name() , mNoteModelList.get(position).getTitle());
+                intent.putExtra(IntentData.CONTENT.name() , mNoteModelList.get(position).getContent());
+                intent.putExtra(IntentData.FROM_NOTE_LIST.name() , true);
+
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(NoteListActivity.this ,
+                        mAdapter.getTransitionView() , mAdapter.getTransitionView().getTransitionName());
+
+                startActivity(intent , activityOptionsCompat.toBundle());
             }
         });
     }
