@@ -1,6 +1,7 @@
 package com.example.notetakingtask;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -27,6 +28,12 @@ public abstract class BaseViewModel extends AndroidViewModel
         }
 
         return null;
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        Log.e("onCleared" , getClass().getSimpleName() + " Cleared");
     }
 
 }

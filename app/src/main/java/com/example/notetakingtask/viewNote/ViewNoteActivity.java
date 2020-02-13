@@ -21,11 +21,6 @@ public class ViewNoteActivity extends BaseActivity {
     //viewModel
     private ViewNoteViewModel mViewNoteViewModel;
 
-    //flags
-    private boolean fromAddNote = false;
-
-    String title = "" , content = "" , timeStamp = "";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -38,12 +33,12 @@ public class ViewNoteActivity extends BaseActivity {
 
         mViewNoteViewModel = new ViewModelProvider(this).get(ViewNoteViewModel.class);
 
-        fromAddNote = getIntent().getBooleanExtra(AddNoteActivity.IntentData.FROM_ADD_NOTE.name() , false);
-        title = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.TITLE.name()) :
+        mViewNoteViewModel.fromAddNote = getIntent().getBooleanExtra(AddNoteActivity.IntentData.FROM_ADD_NOTE.name() , false);
+        mViewNoteViewModel.title = mViewNoteViewModel.fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.TITLE.name()) :
                 getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
-        content = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name()) :
+        mViewNoteViewModel.content = mViewNoteViewModel.fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name()) :
                 getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
-        timeStamp = fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.TIMESTAMP.name()) :
+        mViewNoteViewModel.timeStamp = mViewNoteViewModel.fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.TIMESTAMP.name()) :
                 getIntent().getStringExtra(NoteListActivity.IntentData.TIMESTAMP.name());
 
         initObservers();
@@ -60,9 +55,9 @@ public class ViewNoteActivity extends BaseActivity {
             {
                 if(update)
                 {
-                    tv_header_toolbar.setText(title);
-                    tv_note.setText(content);
-                    tv_timestamp.setText(timeStamp);
+                    tv_header_toolbar.setText(mViewNoteViewModel.title);
+                    tv_note.setText(mViewNoteViewModel.content);
+                    tv_timestamp.setText(mViewNoteViewModel.timeStamp);
                 }
             }
         });
@@ -78,7 +73,7 @@ public class ViewNoteActivity extends BaseActivity {
     {
         super.onBackPressed();
 
-        if(fromAddNote)
+        if(mViewNoteViewModel.fromAddNote)
         {
             Intent intent = new Intent(ViewNoteActivity.this , NoteListActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

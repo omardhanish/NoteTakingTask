@@ -1,6 +1,7 @@
 package com.example.notetakingtask.noteList;
 
 import android.app.Application;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import com.example.notetakingtask.repository.NoteRepoApi;
 import com.example.notetakingtask.repository.NoteRepository;
 import com.example.notetakingtask.repository.model.NoteModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoteListViewModel extends BaseViewModel
@@ -24,6 +26,9 @@ public class NoteListViewModel extends BaseViewModel
     private MutableLiveData<View> addNoteOnClick = new MutableLiveData<>();
     private LiveData<List<NoteModel>> noteModelList;
     private MutableLiveData<Integer> callViewActivity = new MutableLiveData<>();
+
+    //ui data
+    List<NoteModel> mNoteModelList = new ArrayList<>();
 
     public NoteListViewModel(@NonNull Application application)
     {
@@ -42,11 +47,8 @@ public class NoteListViewModel extends BaseViewModel
         return noteModelList;
     }
 
-    void setAddNoteOnClick(View view) {
-        this.addNoteOnClick.setValue(view);
-    }
-
     MutableLiveData<Integer> getCallViewActivity() {
         return callViewActivity;
     }
+
 }

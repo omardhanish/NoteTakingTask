@@ -33,9 +33,6 @@ public class AddNoteActivity extends BaseActivity
     //viewModel
     AddNoteViewModel mAddNoteViewModel;
 
-    //flag
-    private boolean allowSaveClick = false;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -61,7 +58,7 @@ public class AddNoteActivity extends BaseActivity
         tv_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAddNoteViewModel.setSaveOnClick(view);
+                mAddNoteViewModel.getSaveOnClick().setValue(view);
             }
         });
 
@@ -102,7 +99,8 @@ public class AddNoteActivity extends BaseActivity
 
     private void setUpdateUiBasedOnContent()
     {
-        mAddNoteViewModel.setUpdateUiBasedOnContent(et_title.getText().toString().trim() , et_note.getText().toString().trim());
+        mAddNoteViewModel.getUpdateUiBasedOnContent().setValue(mAddNoteViewModel.isTitleNoteNotEmpty(et_title.getText().toString()
+                , et_note.getText().toString()));
     }
 
     @Override
@@ -112,12 +110,12 @@ public class AddNoteActivity extends BaseActivity
             @Override
             public void onChanged(Boolean show)
             {
-                allowSaveClick = show;
-                tv_max_lengt.setText("(" + et_title.getText().toString().length() +  "/100) ");
+                mAddNoteViewModel.allowSaveClick = show;
+                tv_max_lengt.setText("(" + et_title.getText().toString().length() +  "/100)");
                 if(show)
                 {
                     tv_save.setBackground(getResources().getDrawable(R.drawable.border_green));
-                } else{
+                } else {
                     tv_save.setBackground(getResources().getDrawable(R.drawable.border_green_disabled));
                 }
             }
@@ -127,7 +125,7 @@ public class AddNoteActivity extends BaseActivity
             @Override
             public void onChanged(View view)
             {
-                if(allowSaveClick)
+                if( mAddNoteViewModel.allowSaveClick)
                 {
                     NoteModel noteModel = new NoteModel();
                     noteModel.setTitle(et_title.getText().toString());

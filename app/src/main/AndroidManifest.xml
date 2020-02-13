@@ -12,7 +12,6 @@
         android:name=".NoteApplication">
 
         <activity android:name=".noteList.NoteListActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/NoActionTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +22,9 @@
 
 
         <activity android:name=".addNote.AddNoteActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/NoActionTheme"/>
 
         <activity android:name=".viewNote.ViewNoteActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/NoActionTheme"/>
 
     </application>

@@ -36,8 +36,6 @@ public class NoteListActivity extends BaseActivity
     //viewModel
     NoteListViewModel mNoteListViewModel;
 
-    List<NoteModel> mNoteModelList = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -53,7 +51,7 @@ public class NoteListActivity extends BaseActivity
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , RecyclerView.VERTICAL , false);
         rv_note_list.setLayoutManager(linearLayoutManager);
 
-        mAdapter = new NoteListAdapter(this , mNoteModelList);
+        mAdapter = new NoteListAdapter(this , mNoteListViewModel.mNoteModelList);
         mAdapter.setNoteListViewModel(mNoteListViewModel);
         rv_note_list.setAdapter(mAdapter);
 
@@ -68,7 +66,7 @@ public class NoteListActivity extends BaseActivity
             @Override
             public void onClick(View view)
             {
-                mNoteListViewModel.setAddNoteOnClick(view);
+                mNoteListViewModel.getAddNoteOnClick().setValue(view);
             }
         });
 
@@ -76,7 +74,7 @@ public class NoteListActivity extends BaseActivity
             @Override
             public void onClick(View view)
             {
-                mNoteListViewModel.setAddNoteOnClick(view);
+                mNoteListViewModel.getAddNoteOnClick().setValue(view);
             }
         });
     }
@@ -113,8 +111,8 @@ public class NoteListActivity extends BaseActivity
                             else
                                 tv_empty.setVisibility(View.INVISIBLE);
 
-                            mNoteModelList.clear();
-                            mNoteModelList.addAll(noteModels);
+                            mNoteListViewModel.mNoteModelList.clear();
+                            mNoteListViewModel.mNoteModelList.addAll(noteModels);
 
                             if(mAdapter != null)
                                 mAdapter.notifyDataSetChanged();
@@ -130,9 +128,9 @@ public class NoteListActivity extends BaseActivity
             public void onChanged(Integer position)
             {
                 Intent intent  = new Intent(NoteListActivity.this , ViewNoteActivity.class);
-                intent.putExtra(IntentData.TITLE.name() , mNoteModelList.get(position).getTitle());
-                intent.putExtra(IntentData.CONTENT.name() , mNoteModelList.get(position).getContent());
-                intent.putExtra(IntentData.TIMESTAMP.name() , mNoteModelList.get(position).getTimestamp());
+                intent.putExtra(IntentData.TITLE.name() , mNoteListViewModel.mNoteModelList.get(position).getTitle());
+                intent.putExtra(IntentData.CONTENT.name() , mNoteListViewModel.mNoteModelList.get(position).getContent());
+                intent.putExtra(IntentData.TIMESTAMP.name() , mNoteListViewModel.mNoteModelList.get(position).getTimestamp());
                 intent.putExtra(IntentData.FROM_NOTE_LIST.name() , true);
 
                 ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(NoteListActivity.this ,

@@ -18,6 +18,11 @@ public class ViewNoteViewModel extends BaseViewModel
     //LiveData
     private MutableLiveData<Boolean> setNoteDetails = new MutableLiveData<>();
 
+    //flag
+    boolean fromAddNote = false;
+    //ui data
+    String title = "" , content = "" , timeStamp = "";
+
 
     public ViewNoteViewModel(@NonNull Application application)
     {

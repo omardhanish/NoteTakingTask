@@ -20,35 +20,31 @@ public class AddNoteViewModel extends BaseViewModel
     private MutableLiveData<View> saveOnClick = new MutableLiveData<>();
     private MutableLiveData<Boolean> updateUiBasedOnContent = new MutableLiveData<>();
 
+    //flag
+    boolean allowSaveClick = false;
+
     public AddNoteViewModel(@NonNull Application application) {
         super(application);
         mNoteRepository = getRepo(RepoName.NOTE , NoteRepository.class);
     }
 
-    // live
-    MutableLiveData<View> getSaveOnClick() {
-        return saveOnClick;
-    }
-
-    void setSaveOnClick(View view)
-    {
-        saveOnClick.setValue(view);
-    }
+    // liveData
+    MutableLiveData<View> getSaveOnClick() { return saveOnClick; }
 
     MutableLiveData<Boolean> getUpdateUiBasedOnContent() {
         return updateUiBasedOnContent;
     }
 
-    void setUpdateUiBasedOnContent(String title , String note)
-    {
-        this.updateUiBasedOnContent.setValue(title.length() > 0  && note.length() > 0);
-    }
-
-    // other
+    //repo helper methods
     void addNote(NoteModel noteModel)
     {
         mNoteRepository.addNote(noteModel);
     }
 
+    //Test logic's
+    public boolean isTitleNoteNotEmpty(String title , String note)
+    {
+        return title != null && note != null && title.trim().length() > 0  && note.trim().length() > 0;
+    }
 
 }
