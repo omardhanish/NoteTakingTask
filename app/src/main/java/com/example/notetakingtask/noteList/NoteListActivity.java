@@ -28,7 +28,7 @@ public class NoteListActivity extends BaseActivity
 
     //View
     RecyclerView rv_note_list;
-    TextView tv_add;
+    TextView tv_add, tv_empty;
 
     //adapter
     NoteListAdapter mAdapter;
@@ -46,6 +46,7 @@ public class NoteListActivity extends BaseActivity
 
         rv_note_list = findViewById(R.id.rv_note_list);
         tv_add = findViewById(R.id.tv_add);
+        tv_empty = findViewById(R.id.tv_empty);
 
         mNoteListViewModel = new ViewModelProvider(this).get(NoteListViewModel.class);
 
@@ -64,6 +65,14 @@ public class NoteListActivity extends BaseActivity
     protected void initClickListener()
     {
         tv_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                mNoteListViewModel.setAddNoteOnClick(view);
+            }
+        });
+
+        tv_empty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -99,6 +108,11 @@ public class NoteListActivity extends BaseActivity
                     {
                         if(noteModels != null)
                         {
+                            if(noteModels.size() == 0)
+                                tv_empty.setVisibility(View.VISIBLE);
+                            else
+                                tv_empty.setVisibility(View.INVISIBLE);
+
                             mNoteModelList.clear();
                             mNoteModelList.addAll(noteModels);
 
