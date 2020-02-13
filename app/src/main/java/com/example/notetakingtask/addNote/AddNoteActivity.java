@@ -28,7 +28,7 @@ public class AddNoteActivity extends BaseActivity
 
     //View
     EditText et_title , et_note;
-    TextView tv_save;
+    TextView tv_save , tv_max_lengt;
 
     //viewModel
     AddNoteViewModel mAddNoteViewModel;
@@ -45,13 +45,14 @@ public class AddNoteActivity extends BaseActivity
         et_note = findViewById(R.id.et_note);
         et_title = findViewById(R.id.et_title);
         tv_save = findViewById(R.id.tv_save);
+        tv_max_lengt = findViewById(R.id.tv_max_lengt);
 
         mAddNoteViewModel = new ViewModelProvider(this).get(AddNoteViewModel.class);
 
         initClickListener();
         initObservers();
 
-        setShowHideSaveButton();
+        setUpdateUiBasedOnContent();
     }
 
     @Override
@@ -77,7 +78,7 @@ public class AddNoteActivity extends BaseActivity
 
             @Override
             public void afterTextChanged(Editable editable) {
-                setShowHideSaveButton();
+                setUpdateUiBasedOnContent();
             }
         });
 
@@ -94,24 +95,25 @@ public class AddNoteActivity extends BaseActivity
 
             @Override
             public void afterTextChanged(Editable editable) {
-                setShowHideSaveButton();
+                setUpdateUiBasedOnContent();
             }
         });
     }
 
-    private void setShowHideSaveButton()
+    private void setUpdateUiBasedOnContent()
     {
-        mAddNoteViewModel.setShowHideShowButton(et_title.getText().toString().trim() , et_note.getText().toString().trim());
+        mAddNoteViewModel.setUpdateUiBasedOnContent(et_title.getText().toString().trim() , et_note.getText().toString().trim());
     }
 
     @Override
     protected void initObservers()
     {
-        mAddNoteViewModel.getShowHideShowButton().observe(this, new Observer<Boolean>() {
+        mAddNoteViewModel.getUpdateUiBasedOnContent().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean show)
             {
                 allowSaveClick = show;
+                tv_max_lengt.setText("(" + et_title.getText().toString().length() +  "/100) ");
                 if(show)
                 {
                     tv_save.setBackground(getResources().getDrawable(R.drawable.border_green));

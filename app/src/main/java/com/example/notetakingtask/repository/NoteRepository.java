@@ -1,9 +1,6 @@
 package com.example.notetakingtask.repository;
 
-import android.app.Application;
-
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.notetakingtask.AsyncProcess;
 import com.example.notetakingtask.NoteApplication;

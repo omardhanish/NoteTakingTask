@@ -3,14 +3,11 @@ package com.example.notetakingtask;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.notetakingtask.repository.model.NoteModel;
 import com.example.notetakingtask.repository.room.DatabaseClient;
 import com.example.notetakingtask.repository.room.NoteDao;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AsyncProcess
@@ -37,7 +34,7 @@ public class AsyncProcess
 
                 try
                 {
-                    return performNoteRelatedformTask(asyncTaskName , map , inputArgs);
+                    return performNoteRelatedTask(asyncTaskName , map , inputArgs);
                 }catch (Exception e)
                 {
                     e.printStackTrace();
@@ -72,7 +69,7 @@ public class AsyncProcess
     }
 
 
-    private static Map<String , Object> performNoteRelatedformTask(AsyncTaskName asyncTaskName , Map<String , Object> map, final Object... inputArgs)
+    private static Map<String , Object> performNoteRelatedTask(AsyncTaskName asyncTaskName , Map<String , Object> map, final Object... inputArgs)
     {
         Context context = NoteApplication.getInstance();
         NoteDao noteDao = DatabaseClient.getInstance(context).getNoteDao();

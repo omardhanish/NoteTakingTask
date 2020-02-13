@@ -18,7 +18,7 @@ public class AddNoteViewModel extends BaseViewModel
 
     //liveData
     private MutableLiveData<View> saveOnClick = new MutableLiveData<>();
-    private MutableLiveData<Boolean> showHideShowButton = new MutableLiveData<>();
+    private MutableLiveData<Boolean> updateUiBasedOnContent = new MutableLiveData<>();
 
     public AddNoteViewModel(@NonNull Application application) {
         super(application);
@@ -35,13 +35,13 @@ public class AddNoteViewModel extends BaseViewModel
         saveOnClick.setValue(view);
     }
 
-    MutableLiveData<Boolean> getShowHideShowButton() {
-        return showHideShowButton;
+    MutableLiveData<Boolean> getUpdateUiBasedOnContent() {
+        return updateUiBasedOnContent;
     }
 
-    void setShowHideShowButton(String title , String note)
+    void setUpdateUiBasedOnContent(String title , String note)
     {
-        this.showHideShowButton.setValue(title.length() > 0  && note.length() > 0);
+        this.updateUiBasedOnContent.setValue(title.length() > 0  && note.length() > 0);
     }
 
     // other
