@@ -41,7 +41,7 @@ public class AddNoteViewModel extends BaseViewModel
         mNoteRepository.addNote(noteModel);
     }
 
-    //Test logic's
+    //Test logic's methods
     public boolean isTitleNoteNotEmpty(String title , String note)
     {
         return title != null && note != null && title.trim().length() > 0  && note.trim().length() > 0;
