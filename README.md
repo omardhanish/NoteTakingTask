@@ -1,5 +1,5 @@
 # NoteTakingTask
-Basic Note Taking App with google recommended MVVM(Repository) design, Room(persistence), Junit and Mockito used for unit testing, best suited for beginners, Check ReadMe for more details :-)
+Basic Note Taking App with google recommended MVVM(Repository) design, Room(persistence), Junit and Mockito used for unit testing, I hope it helps beginner's
 
 ScreenShots
 
