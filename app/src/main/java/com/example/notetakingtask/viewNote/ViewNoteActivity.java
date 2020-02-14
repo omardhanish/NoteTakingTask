@@ -37,7 +37,7 @@ public class ViewNoteActivity extends BaseActivity {
         mViewNoteViewModel.title = mViewNoteViewModel.fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.TITLE.name()) :
                 getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
         mViewNoteViewModel.content = mViewNoteViewModel.fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.CONTENT.name()) :
-                getIntent().getStringExtra(NoteListActivity.IntentData.TITLE.name());
+                getIntent().getStringExtra(NoteListActivity.IntentData.CONTENT.name());
         mViewNoteViewModel.timeStamp = mViewNoteViewModel.fromAddNote ? getIntent().getStringExtra(AddNoteActivity.IntentData.TIMESTAMP.name()) :
                 getIntent().getStringExtra(NoteListActivity.IntentData.TIMESTAMP.name());
 
